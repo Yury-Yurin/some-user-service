@@ -13,7 +13,7 @@
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-               <value>classpath:app-db.properties</value>
+               <value>classpath:app-test.properties</value>
                 <value>classpath:app.properties</value>
             </list>
         </property>
@@ -43,6 +43,7 @@
             </list>
         </property>
     </bean>
+
     <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="supportedMediaTypes" value="application/json"/>
         <property name="prettyPrint" value="true" />
@@ -52,5 +53,9 @@
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
+    <mvc:resources mapping="/resources/js/**" location="/resources/js/" />
+    <mvc:resources mapping="/resources/css/**" location="/resources/css/" />
+    <mvc:resources mapping="/resources/fonts/**" location="/resources/fonts/" />
 
 </beans>

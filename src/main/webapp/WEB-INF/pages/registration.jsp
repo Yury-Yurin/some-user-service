@@ -7,32 +7,29 @@
 <%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html lang="en">
-<header>
-</header>
+<head>
+<meta charset="utf-8" />
+<link href="resources/css/bootstrap.min.css" rel="stylesheet">
+ <link href="resources/css/signin.css" rel="stylesheet">
+</head>
 <body>
-<h1 align="center">Registration</h1>
-<div align=center>
-<form:form id="userForm" method="POST" commandName="user" action="addUser">
-<table>
-    <tr>
-        <td align=right>Login:</td>
-        <td><form:input id="login" path="login" type="text"/></td>
-    </tr>
-    <tr>
-        <td align=right>Password:</td>
-        <td><form:input path="password" id="pass" type="password"/></td>
-    </tr>
-    <tr>
-         <td align=right>First name:</td>
-         <td><form:input path="firstName" id="firstName" type="text"/></td>
-     </tr>
-     <tr>
-          <td align=right>Last name:</td>
-          <td><form:input path="lastName" id="lastName" type="text"/></td>
-      </tr>
-</table>
-<input type="submit" value="Add"/>
+<script src="resources/js/jquery.js"></script>
+<script src="resources/js/bootstrap.js"></script>
+<div class="container">
+<form:form class="form-signin" id="userForm" method="POST" commandName="user" action="addUser" accept-charset="UTF-8">
+ <h2 class="form-signin-heading">Please sign up</h2>
+  <label for="inputLogin" class="sr-only">Email address</label>
+  <form:input type="login" id="inputLogin" path="login" class="form-control" placeholder="Login"/>
+  <label for="inputPassword" class="sr-only">Password</label>
+  <form:input type="password" id="inputPassword" path="password" class="form-control" placeholder="Password"/>
+  <label for="inputFirstName" class="sr-only">First name</label>
+  <form:input type="text" id="inputFirstName" path="firstName" class="form-control" placeholder="First name"/>
+  <label for="inputLastName" class="sr-only">Last name</label>
+  <form:input type="text" id="inputLastName" path="password" class="form-control" placeholder="Last name"/>
+  <label for="inputBirthDate"><h4>Birth date</h4></label>
+  <form:input type="date" id="inputLastName" path="birthDate" class="form-control" placeholder="Birth date"/>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
 </form:form>
 </div>
-
+</body>
 </html>

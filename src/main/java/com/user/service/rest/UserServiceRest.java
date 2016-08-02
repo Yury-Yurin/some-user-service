@@ -56,4 +56,19 @@ public class UserServiceRest implements UserService {
     public Integer updateUser(@RequestBody User user) throws NoSuchAlgorithmException {
         return userService.updateUser(user);
     }
+
+    @RequestMapping(value = "/delete" , method = RequestMethod.DELETE, produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public Integer deleteUser(@RequestParam("id") Integer id) {
+        return userService.deleteUser(id);
+    }
+
+    public String signIn(User user) throws NoSuchAlgorithmException {
+        return null;
+    }
+
+    public User getUserByToken(String token) {
+        return null;
+    }
 }

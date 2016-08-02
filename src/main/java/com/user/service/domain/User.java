@@ -1,17 +1,28 @@
 package com.user.service.domain;
 
-import java.sql.Timestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
-/**
- * Created by yury on 7/28/16.
- */
+import java.sql.Timestamp;
+import java.util.Date;
+
 public class User {
     private Integer userId;
     private String login;
     private String password;
     private String firstName;
     private String lastName;
-    private Timestamp birthDate;
+
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date birthDate;
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -53,16 +64,21 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Timestamp getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Timestamp birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
     public User() {
 
+    }
+
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
     }
 
     public User(Integer id,String login, String password) {
@@ -86,7 +102,8 @@ public class User {
         PASSWORD("password"),
         FIRST_NAME("firstName"),
         LAST_NAME("lastName"),
-        BIRTH_DATE("birthDate");
+        BIRTH_DATE("birthDate"),
+        TOKEN("token");
 
         private final String value;
         UserFields(String s) {
