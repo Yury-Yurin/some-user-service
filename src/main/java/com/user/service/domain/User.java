@@ -2,7 +2,6 @@ package com.user.service.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class User {

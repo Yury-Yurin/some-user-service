@@ -19,6 +19,15 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <!--<session-config>
+        <session-timeout>525600</session-timeout>
+        <cookie-config>
+            <tracking-mode>COOKIE</tracking-mode>
+            <max-age>3600000</max-age>
+        </cookie-config>
+    </session-config>-->
+
+
     <filter>
         <filter-name>FormEncodingSetterFilter</filter-name>
         <filter-class>com.user.service.rest.CharacterFilter</filter-class>

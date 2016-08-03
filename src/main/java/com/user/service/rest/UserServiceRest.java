@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class UserServiceRest implements UserService {
     @RequestMapping(value = "add", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public Integer addUser(@RequestBody User user) throws NoSuchAlgorithmException {
+    public Integer addUser(@RequestBody User user) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         LOGGER.info("add user rest");
         return userService.addUser(user);
     }
@@ -53,7 +54,7 @@ public class UserServiceRest implements UserService {
     @RequestMapping(value = "/update", method = RequestMethod.PUT,produces = "application/json", consumes = "application/json")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @ResponseBody
-    public Integer updateUser(@RequestBody User user) throws NoSuchAlgorithmException {
+    public Integer updateUser(@RequestBody User user) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         return userService.updateUser(user);
     }
 

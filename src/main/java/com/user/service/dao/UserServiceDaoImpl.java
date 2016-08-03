@@ -58,7 +58,7 @@ public class UserServiceDaoImpl implements UserDao {
             user.setPassword(resultSet.getString("password"));
             user.setFirstName(resultSet.getString("firstName"));
             user.setLastName(resultSet.getString("lastName"));
-            user.setBirthDate(resultSet.getTimestamp("birthDate"));
+            user.setBirthDate(resultSet.getDate("birthDate"));
             user.setToken(resultSet.getString("token"));
             return user;
         }
@@ -147,7 +147,11 @@ public class UserServiceDaoImpl implements UserDao {
     public User getUserByToken(String token) {
         HashMap<String,Object> map = new HashMap<String, Object>();
         map.put(TOKEN.getValue(),token);
-        return namedParameterJdbcTemplate.queryForObject(getUserByToken,map,mapper);
+        try {
+            return namedParameterJdbcTemplate.queryForObject(getUserByToken, map, mapper);
+        } catch (EmptyResultDataAccessException ex) {
+            return null;
+        }
     }
 
     public String getToken() {

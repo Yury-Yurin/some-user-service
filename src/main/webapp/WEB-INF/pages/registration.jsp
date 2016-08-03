@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
  <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -25,10 +25,10 @@
   <label for="inputFirstName" class="sr-only">First name</label>
   <form:input type="text" id="inputFirstName" path="firstName" class="form-control" placeholder="First name"/>
   <label for="inputLastName" class="sr-only">Last name</label>
-  <form:input type="text" id="inputLastName" path="password" class="form-control" placeholder="Last name"/>
+  <form:input type="text" id="inputLastName" path="lastName" class="form-control" placeholder="Last name"/>
   <label for="inputBirthDate"><h4>Birth date</h4></label>
-  <form:input type="date" id="inputLastName" path="birthDate" class="form-control" placeholder="Birth date"/>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+  <form:input type="date" id="inputBirthDate" path="birthDate" class="form-control" placeholder="Birth date"/>
+  <button class="btn btn-lg btn-my btn-block" background-color="green" type="submit">Sign Up</button>
 </form:form>
 </div>
 </body>
