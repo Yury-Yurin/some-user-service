@@ -13,7 +13,7 @@
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-               <value>classpath:app-test.properties</value>
+               <value>classpath:app-db.properties</value>
                 <value>classpath:app.properties</value>
             </list>
         </property>
@@ -53,9 +53,6 @@
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-
-    <bean id="multipartResolver"
-          class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
     <mvc:resources mapping="/resources/js/**" location="/resources/js/" />
     <mvc:resources mapping="/resources/css/**" location="/resources/css/" />

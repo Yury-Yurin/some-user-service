@@ -1,6 +1,7 @@
 package com.user.service.rest;
 
 import com.user.service.UserService;
+import com.user.service.domain.Image;
 import com.user.service.domain.User;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,21 @@ public class UserServiceRest implements UserService {
     }
 
     public User getUserByToken(String token) {
+        return null;
+    }
+
+    @Override
+    public List<Image> getUserImages(Integer userId) {
+        return null;
+    }
+
+    @Override
+    public Integer addImg(String url, Integer userId) {
+        return null;
+    }
+
+    @Override
+    public Integer deleteImg(Integer imgId) {
         return null;
     }
 }

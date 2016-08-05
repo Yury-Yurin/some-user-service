@@ -1,5 +1,6 @@
 package com.user.service.dao;
 
+import com.user.service.domain.Image;
 import com.user.service.domain.User;
 
 import java.math.BigInteger;
@@ -18,4 +19,8 @@ public interface UserDao {
     public Integer deleteUser(Integer id);
     public void setToken(Integer id,BigInteger token);
     public User getUserByToken(String token);
+    List<Image> getUserImages(Integer userId);
+    Integer addImg(String url, Integer userId);
+    Integer deleteImg(Integer imgId);
+
 }

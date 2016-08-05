@@ -1,5 +1,6 @@
 package com.user.service;
 
+import com.user.service.domain.Image;
 import com.user.service.domain.User;
 
 import java.io.UnsupportedEncodingException;
@@ -11,12 +12,15 @@ import java.util.List;
  * Created by yury on 7/28/16.
  */
 public interface UserService {
-    public List<User> getAllUsers();
-    public Integer addUser(User user) throws NoSuchAlgorithmException, UnsupportedEncodingException;
-    public User getUserById(Integer id);
-    public User getUserByLogin(String login);
-    public Integer updateUser(User user) throws NoSuchAlgorithmException, UnsupportedEncodingException;
-    public Integer deleteUser(Integer id);
-    public String signIn(User user) throws NoSuchAlgorithmException, UnsupportedEncodingException;
-    public User getUserByToken(String token) throws ParseException;
+    List<User> getAllUsers();
+    Integer addUser(User user) throws NoSuchAlgorithmException, UnsupportedEncodingException;
+    User getUserById(Integer id);
+    User getUserByLogin(String login);
+    Integer updateUser(User user) throws NoSuchAlgorithmException, UnsupportedEncodingException;
+    Integer deleteUser(Integer id);
+    String signIn(User user) throws NoSuchAlgorithmException, UnsupportedEncodingException;
+    User getUserByToken(String token) throws ParseException;
+    List<Image> getUserImages(Integer userId);
+    Integer addImg(String url, Integer userId);
+    Integer deleteImg(Integer imgId);
 }

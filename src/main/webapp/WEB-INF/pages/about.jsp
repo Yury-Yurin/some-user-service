@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -31,29 +31,27 @@
                <h3 class="masthead-brand">Cover</h3>
                <nav>
                  <ul class="nav masthead-nav">
-                   <li class="active"><a href="main">Home</a></li>
+                   <li><a href="main">Home</a></li>
                    <li><a href="">Features</a></li>
-                   <li><a href="about">Contact</a></li>
-                 <li><a href="logout">Logout</a></li>
+                   <li class="active"><a href="about">Contact</a></li>
+                    <li><a href="logout">Logout</a></li>
+                 </ul>
                </nav>
              </div>
            </div>
            <div class="inner cover">
-             <h1 class="cover-heading">Add you images!</h1>
-             <p class="lead"><a href="addImgForm" class="btn btn-lg btn-default">Upload</a></p>
+             <h1 class="cover-heading"></h1>
+             <p class="lead">User: ${user.login}</p>
+              <p class="lead">First name: ${user.firstName}</p>
+               <p class="lead">Last name: ${user.lastName}</p>
+               <p class="lead">Birth date: ${user.birthDate}</p>
              <p class="lead">
+               <a href="logout" class="btn btn-lg btn-default">Logout</a>
              </p>
-             <c:if test="${imgs != null}">
-             <c:forEach items="${imgsResized}" var="img">
-             <img src="${img}"/>
-             <a href="deleteImg?imgId=${img.imgId}" class="btn btn-lg btn-default">Delete</a>
-             </c:forEach>
-             </c:if>
             ${user.password}
            </div>
            <div class="mastfoot">
              <div class="inner">
-               <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
              </div>
            </div>
          </div>

@@ -2,6 +2,7 @@ package com.user.service.serv;
 
 import com.user.service.UserService;
 import com.user.service.dao.UserDao;
+import com.user.service.domain.Image;
 import com.user.service.domain.User;
 import org.apache.commons.lang.time.DateUtils;
 import org.apache.logging.log4j.Logger;
@@ -80,6 +81,21 @@ public class UserServiceImpl implements UserService {
     public User getUserByToken(String token) throws ParseException {
         User user = userDao.getUserByToken(token);
         return user;
+    }
+
+    @Override
+    public List<Image> getUserImages(Integer userId) {
+        return userDao.getUserImages(userId);
+    }
+
+    @Override
+    public Integer addImg(String url, Integer userId) {
+        return userDao.addImg(url,userId);
+    }
+
+    @Override
+    public Integer deleteImg(Integer imgId) {
+        return userDao.deleteImg(imgId);
     }
 
     public BigInteger nextRandomBigInteger(BigInteger n) {

@@ -29,7 +29,6 @@
         <form:input type="password" id="inputPassword" path="password" class="form-control" placeholder="Password"/>
         <button class="btn btn-lg btn-my btn-block" type="submit">Sign in</button>
       </form:form>
-
     </div> <!-- /container -->
 </body>
 </html>

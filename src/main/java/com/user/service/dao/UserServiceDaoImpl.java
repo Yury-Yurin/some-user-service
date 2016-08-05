@@ -1,6 +1,6 @@
 package com.user.service.dao;
 
-import com.user.service.UserService;
+import com.user.service.domain.Image;
 import com.user.service.domain.User;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,9 +47,18 @@ public class UserServiceDaoImpl implements UserDao {
     @Value("${user.getByToken}")
     private String getUserByToken;
 
+    @Value("${img.getAll}")
+    private String getAllImages;
+
+    @Value("${img.add}")
+    private String addImg;
+
+    @Value("${img.delete}")
+    private String deleteImg;
+
     private static final Logger LOGGER = org.apache.logging.log4j.LogManager.getLogger();
 
-    private RowMapper<User> mapper = new BeanPropertyRowMapper<User>() {
+    private RowMapper<User> userMapper = new BeanPropertyRowMapper<User>() {
         @Override
         public User mapRow(ResultSet resultSet, int i) throws SQLException {
             User user = new User();
@@ -64,6 +73,17 @@ public class UserServiceDaoImpl implements UserDao {
         }
     };
 
+    private RowMapper<Image> imgMapper = new BeanPropertyRowMapper<Image>() {
+        @Override
+        public Image mapRow(ResultSet resultSet, int i) throws SQLException {
+           Image img = new Image();
+            img.setUserId(resultSet.getInt("userId"));
+            img.setImgId(resultSet.getInt("imgId"));
+            img.setUrl(resultSet.getString("url"));
+           return img;
+        }
+    };
+
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public UserServiceDaoImpl(DataSource dataSource) {
@@ -73,7 +93,7 @@ public class UserServiceDaoImpl implements UserDao {
     public List<User> getAllUsers() {
         try {
             LOGGER.info("dao");
-            return namedParameterJdbcTemplate.query(getAllUsers, mapper);
+            return namedParameterJdbcTemplate.query(getAllUsers, userMapper);
         }
         catch(Exception ex) {
             LOGGER.info(ex.getMessage());
@@ -85,7 +105,7 @@ public class UserServiceDaoImpl implements UserDao {
     public Integer addUser(User user) {
         KeyHolder key = new GeneratedKeyHolder();
         try {
-            namedParameterJdbcTemplate.update(addUser, getParametersMap(user), key);
+            namedParameterJdbcTemplate.update(addUser, getParametersMapForUser(user), key);
             return key.getKey().intValue();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -96,14 +116,14 @@ public class UserServiceDaoImpl implements UserDao {
     public User getUserById(Integer id) {
         HashMap<String,Object> map = new HashMap<String, Object>();
         map.put(USER_ID.getValue(),id);
-        return namedParameterJdbcTemplate.queryForObject(getUserById,map,mapper);
+        return namedParameterJdbcTemplate.queryForObject(getUserById,map, userMapper);
     }
 
     public User getUserByLogin(String login) {
         HashMap<String,Object> map = new HashMap<String, Object>();
         map.put(LOGIN.getValue(),login);
         try {
-            return namedParameterJdbcTemplate.queryForObject(getUserByLogin, map, mapper);
+            return namedParameterJdbcTemplate.queryForObject(getUserByLogin, map, userMapper);
         } catch(EmptyResultDataAccessException ex) {
             return null;
         }
@@ -148,9 +168,46 @@ public class UserServiceDaoImpl implements UserDao {
         HashMap<String,Object> map = new HashMap<String, Object>();
         map.put(TOKEN.getValue(),token);
         try {
-            return namedParameterJdbcTemplate.queryForObject(getUserByToken, map, mapper);
+            return namedParameterJdbcTemplate.queryForObject(getUserByToken, map, userMapper);
         } catch (EmptyResultDataAccessException ex) {
             return null;
+        }
+    }
+
+    @Override
+    public List<Image> getUserImages(Integer userId) {
+        HashMap<String,Object> map = new HashMap<String, Object>();
+        map.put(USER_ID.getValue(),userId);
+        try {
+            return namedParameterJdbcTemplate.query(getAllImages,map,imgMapper);
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    @Override
+    public Integer addImg(String url, Integer userId) {
+        KeyHolder key = new GeneratedKeyHolder();
+        try {
+            Image image = new Image();
+            image.setUserId(userId);
+            image.setUrl(url);
+            namedParameterJdbcTemplate.update(addImg,getParametersMapForImg(image),key);
+            return key.getKey().intValue();
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    @Override
+    public Integer deleteImg(Integer imgId) {
+        HashMap<String,Object> map = new HashMap<String, Object>();
+        map.put("imgId",imgId);
+        try {
+            namedParameterJdbcTemplate.update(deleteImg, map);
+            return 1;
+        } catch (Exception e) {
+            return -1;
         }
     }
 
@@ -158,13 +215,20 @@ public class UserServiceDaoImpl implements UserDao {
         return null;
     }
 
-    private MapSqlParameterSource getParametersMap(User user) {
+    private MapSqlParameterSource getParametersMapForUser(User user) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue(LOGIN.getValue(),user.getLogin());
         parameterSource.addValue(PASSWORD.getValue(), user.getPassword());
         parameterSource.addValue(FIRST_NAME.getValue(),user.getFirstName());
         parameterSource.addValue(LAST_NAME.getValue(),user.getLastName());
         parameterSource.addValue(BIRTH_DATE.getValue(), user.getBirthDate());
+        return parameterSource;
+    }
+
+    private MapSqlParameterSource getParametersMapForImg(Image image) {
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("userId",image.getUserId());
+        parameterSource.addValue("url", image.getUrl());
         return parameterSource;
     }
 }
